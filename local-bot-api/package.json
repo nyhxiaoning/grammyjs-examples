@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "bot": "ts-node"
+        "bot": "ts-node bot.ts"
     },
     "dependencies": {
         "express": "^4.17.2",
