@@ -1,5 +1,28 @@
 # grammY examples
 
+## 第一步获取 token
+
+1. 打开[BotFather](URL_ADDRESS1. 打开[BotFather](https://t.me/BotFather)
+2. 点击`/start`
+3. 点击`/newbot`
+4. 输入 bot 的名字
+5. 输入 bot 的用户名
+6. 复制 bot 的 token
+
+## 第二步克隆仓库
+
+2. 点击`/start`
+3. 点击`/newbot`
+4. 输入 bot 的名字
+5. 输入 bot 的用户名
+6. 复制 bot 的 token
+
+## 第二步克隆仓库
+
+```ts
+token: const HENRY_BOT_TOKEN = '7996507522:AAEtMBRvfLZbTQJxkyWmSuIJRoBtA0Tot2I'
+```
+
 This repository contains various bots and setups to help you get started with
 grammY.
 
@@ -141,9 +164,9 @@ with a self-signed TLS certificate, and run your bot on it.
 
 We could have some more examples here, for example:
 
-- command handling
-- filter queries
-- inline keyboards
-- file support
+-   command handling
+-   filter queries
+-   inline keyboards
+-   file support
 
 and other things.

@@ -1,8 +1,9 @@
 import { Bot } from 'grammy'
 import { Agent } from 'https'
+const HENRY_BOT_TOKEN = '7996507522:AAEtMBRvfLZbTQJxkyWmSuIJRoBtA0Tot2I'
 
 // 1. Create a bot
-export const bot = new Bot(process.env.BOT_TOKEN as string, {
+export const bot = new Bot(HENRY_BOT_TOKEN as string, {
     client: {
         // 2. Set the local Bot API URL
         apiRoot: 'https://bot-api',
@@ -21,3 +22,5 @@ bot.on('message:text', ctx => ctx.reply(ctx.message.text))
 
 // 4. Start the bot
 bot.start()
+
+// TODO:启动机器人后，发送消息
