@@ -1,0 +1,59 @@
+{
+    // 非方法的协议内容
+    "update": {
+        "update_id": 324742775,
+        "message": {
+            "message_id": 200,
+            "from": {
+                "id": 8015888418,
+                "is_bot": false,
+                "first_name": "henry1006",
+                "last_name": "henry",
+                "language_code": "zh-hans"
+            },
+            "chat": {
+                "id": 8015888418,
+                "first_name": "henry1006",
+                "last_name": "henry",
+                "type": "private"
+            },
+            "date": 1752569098,
+            "text": "/turnon",
+            "entities": [
+                {
+                    "offset": 0,
+                    "length": 7,
+                    "type": "bot_command"
+                }
+            ]
+        }
+    },
+    "api": {
+        "token": "7996507522:AAEtMBRvfLZbTQJxkyWmSuIJRoBtA0Tot2I",
+        "raw": {},
+        "config": {}
+    },
+    "me": {
+        "id": 7996507522,
+        "is_bot": true,
+        "first_name": "henryBot",
+        "username": "testhenry1006_bot",
+        "can_join_groups": true,
+        "can_read_all_group_messages": false,
+        "supports_inline_queries": true,
+        "can_connect_to_business": false,
+        "has_main_web_app": false
+    }
+    // 标准的协议里面下面全是方法覆盖
+    // 单独获取几个属性，也会触发get方法自动获取：
+    //     msg: [Getter
+    //   chat: [Getter
+    //   senderChat: [Getter
+    //   from: [Getter
+    //   msgId: [Getter
+    //   chatId: [Getter
+    //   chatType: [Getter
+    //   senderChatId: [Getter
+    //     ],
+    // 通过单独一个update消息对象，也可以通过专门的属性方法获取：
+}
