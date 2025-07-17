@@ -43,13 +43,6 @@ export function onlyAccept(str: string) {
             'Hello from custom API method!===>sendSingleDevice'
         )
 
-        for (const key in ctx.api) {
-            console.log(key, JSON.stringify(key), 'key')
-            if (JSON.stringify(key) === 'raw') {
-                console.log(key)
-                console.log('RAW')
-            }
-        }
         // 命令拦截
         if (ctx.chat.type === 'private') {
             console.log('private')
@@ -80,6 +73,33 @@ export function onlyAccept(str: string) {
             await ctx.reply(
                 `I'm not talking to you! NOT 1111  You don't care about ${str}!`
             )
+        }
+    }
+}
+
+export function onlyBeforeAccept(str: string) {
+    // 创建并返回一个中间件。
+    return async (ctx: any, next: any) => {
+        console.log('onlyBeforeAccept')
+        // 获取用户的名字。
+        const name = ctx.from?.first_name
+
+        console.log(ctx.text, JSON.stringify(ctx.text), 'ctx.text')
+
+        // 通过所有匹配的 updates。
+        if (name === undefined || name.includes(str)) {
+            // 将控制流传递给下游的中间件。
+            await next()
+        } else {
+            // 告诉他们我们不喜欢他们。
+
+            await ctx.reply(
+                `进入中间件首次之前：I'm not talking to you! NOT 1111  You don't care about ${str}!`
+            )
+
+            const result2 = await ctx.api.getMaoPaoDevices()
+            console.log(result2, JSON.stringify(result2), 'result')
+            await ctx.reply(result2)
         }
     }
 }

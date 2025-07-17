@@ -1,4 +1,4 @@
-import { Bot, Context, Api, Transformer } from 'grammy'
+import { Bot, Context, Api, Transformer, ApiCallFn } from 'grammy'
 import type { RawApi } from 'grammy/out/core/client'
 
 // 1. 扩展 Api 类型
@@ -9,8 +9,22 @@ type MyApi = Api & {
 // 扩展 api 原型
 ;(Api.prototype as any).TestFnTest2 = async function (ctx): Promise<string> {
     console.log('传入上下文', ctx, 'CTX')
-    console.log('通过 prototype 增加的方法')
-    return '这是通过 prototype 增加的自定义 API 方法'
+    console.log('通过 prototype 增加的方法TestFnTest2')
+    return '这是通过 prototype 增加的自定义 API 方法TestFnTest2'
+}
+;(Api.prototype as any).getMaopaoDevices = async function (
+    ctx
+): Promise<string> {
+    console.log('传入上下文', ctx, 'CTX')
+    console.log('通过 prototype 增加的方法getMaopaoDevices')
+    return '这是通过 prototype 增加的自定义 API 方法getMaopaoDevices'
+}
+;(Api.prototype as any).sendMaopaoMessage = async function (
+    ctx
+): Promise<string> {
+    console.log('传入上下文', ctx, 'CTX')
+    console.log('通过 prototype 增加的方法sendMaopaoMessage')
+    return '这是通过 prototype 增加的自定义 API 方法sendMaopaoMessage'
 }
 
 // 3. 初始化 bot
@@ -22,6 +36,11 @@ const bot = new Bot<Context, MyApi>(
 bot.command('start', async ctx => {
     const res = await ctx.api.TestFnTest2(ctx)
     await ctx.reply(`你调用了 TestFnTest2: ${res}`)
+
+    const res2 = await ctx.api.getMaopaoDevices(ctx)
+    await ctx.reply(`你调用了 getMaopaoDevices: ${res2}`)
+    const res3 = await ctx.api.sendMaopaoMessage(ctx)
+    await ctx.reply(`你调用了 sendMaopaoMessage: ${res3}`)
 })
 
 bot.start()

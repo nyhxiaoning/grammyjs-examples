@@ -13,6 +13,8 @@ type MyApi = Api & {
     return '这是通过 prototype 增加的自定义 API 方法'
 }
 
+type MyContext = Context & { api: MyApi }
+
 class MyNewApi extends Api {
     async TestFnHello(): Promise<string> {
         console.log('MyApi 子类自定义方法调用')

@@ -46,7 +46,7 @@
     }
     // 标准的协议里面下面全是方法覆盖
     // 单独获取几个属性，也会触发get方法自动获取：
-    //     msg: [Getter
+    //   msg: [Getter
     //   chat: [Getter
     //   senderChat: [Getter
     //   from: [Getter
@@ -54,6 +54,5 @@
     //   chatId: [Getter
     //   chatType: [Getter
     //   senderChatId: [Getter
-    //     ],
     // 通过单独一个update消息对象，也可以通过专门的属性方法获取：
 }
