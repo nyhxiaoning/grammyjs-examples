@@ -1,0 +1,24 @@
+{
+    "version": "0.2.0",
+    "compilerOptions": {
+        "sourceMap": true
+    },
+    "configurations": [
+        {
+            "name": "Bun Watch + Debug",
+            "type": "bun",
+            "request": "launch",
+            "runtimeExecutable": "bun",
+            "runtimeArgs": [
+                "run",
+                "--watch",
+                "--inspect",
+                "demo-extends-fn.ts"
+            ],
+            "cwd": "${workspaceFolder}/grammy-plugin",
+            "port": 6499,
+            "stopOnEntry": false,
+            "restart": true
+        }
+    ]
+}
