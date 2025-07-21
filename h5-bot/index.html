@@ -15,7 +15,7 @@
             const tg = window.Telegram.WebApp
             tg.expand() // 可选，让 Web App 更大
             function send() {
-                alert('send-点击了方法')
+                // alert('send-点击了方法')
                 const first = parseInt(
                     document.getElementById('first').value,
                     10
@@ -26,16 +26,16 @@
                 )
 
                 const data = JSON.stringify({ first, second })
-                alert(ts.sendData)
+                // alert(ts.sendData)
                 // 发送给 Telegram Bot
                 tg.sendData(data) // <-- 关键步骤
                 // 发送出去后，这里的数据会被 Telegram Bot 接收，但是没有被 Bot 处理，为什么
 
                 console.log('data', data)
-                alert('发送数据: ' + data)
+                // alert('发送数据: ' + data)
                 console.log('tg', tg)
                 // 不关闭 Web App，保证用户可以继续使用
-                // tg.close() // 关闭 Web App
+                tg.close() // 关闭 Web App
             }
         </script>
     </body>
