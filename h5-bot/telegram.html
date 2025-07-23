@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>加法器</title>
+        <script src="https://storage.jeejio.com/jeejio-debug/telegrambot/telegram-web-app.js"></script>
+    </head>
+    <body>
+        <input id="first" placeholder="第一个数字" />
+        <input id="second" placeholder="第二个数字" />
+        <button onclick="sendTelegram()">telegram原生计算</button>
+        <button onclick="sendTelegram2()">另外的api发送调用</button>
+
+        <script>
+            const tg = window.Telegram.WebApp
+
+            window.Telegram.WebApp.ready()
+            alert('Telegram Web App is ready')
+            tg.expand() // 可选，让 Web App 更大
+
+            function sendTelegram() {
+                // alert('send-点击了方法')
+                const first = parseInt(
+                    document.getElementById('first').value,
+                    10
+                )
+                const second = parseInt(
+                    document.getElementById('second').value,
+                    10
+                )
+
+                const data = JSON.stringify({ first, second })
+                // alert(ts.sendData)
+                // 发送给 Telegram Bot
+                tg.sendData(data) // <-- 关键步骤
+                // 发送出去后，这里的数据会被 Telegram Bot 接收，但是没有被 Bot 处理，为什么
+
+                console.log('data', data)
+                // alert('发送数据: ' + data)
+                console.log('tg', tg)
+                // 不关闭 Web App，保证用户可以继续使用
+                // tg.close() // 关闭 Web App
+            }
+
+            function sendTelegram2() {
+                const payload = {
+                    action: 'confirm_order',
+                    orderId: 'A10086',
+                    amount: 99.99,
+                }
+
+                // 发送数据给 Bot（必须是字符串）
+                Telegram.WebApp.sendData(JSON.stringify(payload))
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>加法器</title>
+        <script src="https://storage.jeejio.com/jeejio-debug/telegrambot/telegram-web-app.js"></script>
+    </head>
+    <body>
+        <input id="first" placeholder="第一个数字" />
+        <input id="second" placeholder="第二个数字" />
+        <button onclick="sendTelegram()">telegram原生计算</button>
+
+        <script>
+            const BOT_TOKEN = '7996507522:AAEtMBRvfLZbTQJxkyWmSuIJRoBtA0Tot2I'
+
+            function sendTelegram() {
+                alert('sendTelegram-点击了方法')
+                const first = parseInt(
+                    document.getElementById('first').value,
+                    10
+                )
+                const second = parseInt(
+                    document.getElementById('second').value,
+                    10
+                )
+
+                const data = JSON.stringify({
+                    first,
+                    second,
+                    chat_id: 7996507522,
+                    text: first + second,
+                })
+                alert('sendTelegram-发送数据: ' + data)
+                fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json', // 告诉服务器请求体是JSON
+                    },
+                    body: data,
+                })
+                    .then(response => response.json()) // 解析响应体为JSON
+                    .then(result => {
+                        alert('请求成功: ' + JSON.stringify(result))
+                        console.log('请求成功:', result)
+                    })
+                    .catch(error => {
+                        alert('请求失败:' + JSON.stringify(error))
+                        console.error('请求失败:', error)
+                    })
+            }
+        </script>
+    </body>
+</html>
