@@ -3,7 +3,7 @@
 // 你的插件可以有一个创建中间件的主函数。
 
 /**
- * 第一件事情：拓展中间件：
+ * 第一件事情：拓展中间件：默认初始化会加上，看自己的实现位置
  * 第二件事情：通过API增加当前的bot上自定义api：
  * https://grammy.dev/zh/advanced/transformers，这里增加了API后：这里
  * TODO:Transformer 函数可以被安装在 bot.api 中。 这是一个没有做任何事情的 transformer 函数的例子：
