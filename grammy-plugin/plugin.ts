@@ -11,24 +11,15 @@
  * @returns
  */
 export function onlyAccept(str: string) {
+    // 引入参数说明
+    console.log(str, 'onlyAccept str')
     // 创建并返回一个中间件。
     return async (ctx: any, next: any) => {
         // 获取用户的名字。
         const name = ctx.from?.first_name
         // 增加当前的设备的上报：
         // 如果发现是打开设备命令：
-        console.log(
-            ctx.api.token,
-            JSON.stringify(ctx.api.token),
-            'ctx.api.token'
-        )
-        console.log(ctx.text, JSON.stringify(ctx.text), 'ctx.text')
-        console.log(ctx.from, JSON.stringify(ctx.from), 'ctx.from')
-        console.log(
-            ctx.chat.type,
-            JSON.stringify(ctx.chat.type),
-            'ctx.chat.type'
-        )
+
         // 最外层内容
         console.log(ctx.api, JSON.stringify(ctx.api), 'ctx.api')
         // 最外层内容
@@ -37,11 +28,6 @@ export function onlyAccept(str: string) {
             ctx.message.text,
             JSON.stringify(ctx.message.text),
             'ctx.message.text'
-        )
-
-        ctx.api.sendMessage(
-            ctx.chat.id,
-            'Hello from custom API method!===>sendSingleDevice'
         )
 
         // 命令拦截
@@ -87,20 +73,7 @@ export function onlyBeforeAccept(str: string) {
 
         console.log(ctx.text, JSON.stringify(ctx.text), 'ctx.text')
 
+        next()
         // 通过所有匹配的 updates。
-        if (name === undefined || name.includes(str)) {
-            // 将控制流传递给下游的中间件。
-            await next()
-        } else {
-            // 告诉他们我们不喜欢他们。
-
-            await ctx.reply(
-                `进入中间件首次之前：I'm not talking to you! NOT 1111  You don't care about ${str}!`
-            )
-
-            const result2 = await ctx.api.getMaoPaoDevices()
-            console.log(result2, JSON.stringify(result2), 'result')
-            await ctx.reply(result2)
-        }
     }
 }
