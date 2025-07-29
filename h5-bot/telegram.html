@@ -16,10 +16,11 @@
             const tg = window.Telegram.WebApp
 
             window.Telegram.WebApp.ready()
-            alert('Telegram Web App is ready')
+
             tg.expand() // 可选，让 Web App 更大
 
             function sendTelegram() {
+                alert('Telegram Web App is ready')
                 // alert('send-点击了方法')
                 const first = parseInt(
                     document.getElementById('first').value,
@@ -44,6 +45,7 @@
             }
 
             function sendTelegram2() {
+                alert(2)
                 const payload = {
                     action: 'confirm_order',
                     orderId: 'A10086',

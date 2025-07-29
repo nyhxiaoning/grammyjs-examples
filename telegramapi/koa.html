@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>加法器</title>
+        <script src="https://storage.jeejio.com/jeejio-debug/telegrambot/telegram-web-app.js"></script>
+    </head>
+    <body>
+        <input id="first" placeholder="第一个数字" />
+        <input id="second" placeholder="第二个数字" />
+        <button onclick="sendPost()">Post</button>
+        <button onclick="sendGet()">Get</button>
+        <button onclick="sendHook()">Hook</button>
+
+        <script>
+            const ServerUrl = 'https://localhost:8443'
+
+            function sendPost() {
+                alert('sendPost-点击了方法')
+                fetch(`${ServerUrl}/sendData`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json', // 告诉服务器请求体是JSON
+                    },
+                    body: JSON.stringify({
+                        first: document.getElementById('first').value,
+                        second: document.getElementById('second').value,
+                    }),
+                })
+                    .then(response => response.json())
+                    .then(result => {
+                        alert('请求成功: ' + JSON.stringify(result))
+                        console.log('请求成功:', result)
+                    })
+                    .catch(error => {
+                        alert('请求失败:' + JSON.stringify(error))
+                        console.error('请求失败:', error)
+                    })
+            }
+
+            function sendGet() {
+                alert('sendGet-点击了方法')
+                fetch(`${ServerUrl}/getData`)
+                    .then(response => response.json())
+                    .then(result => {
+                        alert('请求成功: ' + JSON.stringify(result))
+                        console.log('请求成功:', result)
+                    })
+                    .catch(error => {
+                        alert('请求失败:' + JSON.stringify(error))
+                        console.error('请求失败:', error)
+                    })
+            }
+        </script>
+    </body>
+</html>

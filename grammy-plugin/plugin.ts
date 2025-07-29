@@ -15,6 +15,7 @@ export function onlyAccept(str: string) {
     return async (ctx: any, next: any) => {
         // 获取用户的名字。
         const name = ctx.from?.first_name
+        // 增加当前的设备的上报：
         // 如果发现是打开设备命令：
         console.log(
             ctx.api.token,

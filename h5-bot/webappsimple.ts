@@ -64,7 +64,7 @@ await bot.on('message', async ctx => {
     } else if (ctx.message.text === '普通url') {
         await bot.api.sendMessage(ctx.chat.id, '点击访问', {
             reply_markup: {
-                inline_keyboard: [[{ text: 'web_app', url: BOT_WEB_APP_URL }]],
+                inline_keyboard: [[{ text: 'web_app', url: WEB_APP_URL2 }]],
             },
         })
     } else if (ctx.message.text === '点击打开2') {
@@ -88,6 +88,7 @@ await bot.on('message', async ctx => {
     }
     console.log('Received message:', ctx.message)
 })
+
 bot.catch(err => console.error(err))
 
 // 启动 Bot（长轮询）
