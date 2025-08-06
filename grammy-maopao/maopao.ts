@@ -6,6 +6,8 @@
 
 // TODO:如何拆出来，做成一个中间件
 
+// TODO:实现一个发布订阅者模式：还是利用消息触发事件的订阅，利用主动tal的方法或自定义方法触发事件的发布；
+
 // 临时全局im和mqtt的消息接收变量
 let tempImReceiveMessage = null,
     tempTalReceiveMessage = null
@@ -60,10 +62,10 @@ const MappaoMqtt = {
 // 改进消息接收函数，使其能实时监听并触发事件
 
 // 使用示例：im消息实时监听
-// Mappao.on('message', (msg: object) => {
-//     console.log('Received message through Mappao:', msg)
-//     // 这里可以处理收到的消息
-// })
+Mappao.on('message', (msg: object) => {
+    console.log('Received message im Mappao:', msg)
+    // 这里可以处理收到的消息
+})
 
 // 使用示例：mqtt消息实时监听
 MappaoMqtt.on('message', (msg: object) => {
@@ -155,4 +157,63 @@ async function startListeningToMqttMessages() {
 
     // 开始第一次检查
     checkForNewMqttMessages()
+}
+
+// *****************************封装im消息
+
+// 1.模拟来自im的一条消息发给bot
+// 假装发送im消息
+setTimeout(() => {
+    sendIMessage()
+})
+
+async function sendIMessage(msg?: any) {
+    const response = await fetch(`${MAOPAO_QA_API}/bot/msg`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            content: '请选择一个选项',
+            token: 'sdfsdfsdfsdfdsfdsfd',
+            type: 37,
+            to: {
+                id: '01gxme3655z9nj641dvz4vnhvz',
+            },
+            payload: {
+                type: 'InlineKeyboard',
+                content: {
+                    rows: [
+                        {
+                            buttons: [
+                                {
+                                    title: '选项A',
+                                    type: 0,
+                                    value: 'a',
+                                },
+                                {
+                                    title: '选项B',
+                                    type: 0,
+                                    value: 'b',
+                                },
+                            ],
+                        },
+                        {
+                            buttons: [
+                                {
+                                    title: '选项X',
+                                    type: 0,
+                                    value: 'x',
+                                },
+                            ],
+                        },
+                    ],
+                },
+            },
+        }),
+    })
+        .then(res => res.json())
+        .then(res => {
+            console.log('发送im消息成功', res)
+        })
 }
