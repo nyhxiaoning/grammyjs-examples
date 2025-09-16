@@ -7,13 +7,30 @@
         <script src="https://storage.jeejio.com/jeejio-debug/telegrambot/telegram-web-app.js"></script>
     </head>
     <body>
-        <input id="first" placeholder="第一个数字" />
-        <input id="second" placeholder="第二个数字" />
-        <button onclick="send()">计算</button>
+        <input type="text" id="inputText" />
+        <button id="notifyBtn">发送通知</button>
+
+        <!-- <button onclick="send()">计算</button> -->
 
         <script>
             const tg = window.Telegram.WebApp
             tg.expand() // 可选，让 Web App 更大
+            let inputText = document.getElementById('inputText').value
+            console.log('inputText', inputText)
+            document
+                .getElementById('notifyBtn')
+                .addEventListener('click', async () => {
+                    await fetch('http://localhost:3000/notify', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            msg: inputText,
+                        }),
+                    })
+
+                    tg.close() // 发送后关闭小程序
+                })
+
             function send() {
                 // alert('send-点击了方法')
                 const first = parseInt(
